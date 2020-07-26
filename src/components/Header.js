@@ -1,7 +1,7 @@
 import React from 'react'
 import '../assets/styless/components/Header.scss'
-import logo from '../assets/logo-platzi-video-BW2.png'
-import userIcon from '../assets/user-icon.png'
+import logo from '../assets/static/logo-platzi-video-BW2.png'
+import userIcon from '../assets/static/user-icon.png'
 
 
 

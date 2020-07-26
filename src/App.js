@@ -13,7 +13,7 @@ function App() {
     <Fragment>
       <Header/>
       <Search/>
-      <Categorias>
+      <Categorias title="Mi lista" >
         <Carousel>
           <CarouselItem/>
           <CarouselItem/>
@@ -21,6 +21,22 @@ function App() {
           <CarouselItem/>
         </Carousel>
       </Categorias>
+
+      <Categorias title="Tendencias" >
+        <Carousel>
+          <CarouselItem/>
+          <CarouselItem/>
+        </Carousel>
+      </Categorias>
+
+      <Categorias title="Top 10 - Colombia" >
+        <Carousel>
+          <CarouselItem/>
+          <CarouselItem/>
+          <CarouselItem/>
+        </Carousel>
+      </Categorias>
+
       <Footer/>
     </Fragment>
   );

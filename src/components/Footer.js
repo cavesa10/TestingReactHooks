@@ -6,6 +6,7 @@ const Footerl = styled.footer`
     cursor: pointer;
     font-size: 14px;
     padding-left: 30px;
+    margin: 2rem 0 ;
     text-decoration: none;
     & a {
       color: white;
@@ -16,6 +17,11 @@ const Footerl = styled.footer`
     }
     & a:hover{
       text-decoration: underline;
+    }
+    @media (max-width: 600px){
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
     }
 `;
 
