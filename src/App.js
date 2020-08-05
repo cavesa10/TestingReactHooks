@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 
 import {Header} from './components/Header';
 import {Search} from './components/Search';
@@ -9,6 +9,17 @@ import {Footer} from './components/Footer';
 import './assets/styless/App.scss'
 
 function App() {
+
+  const [video, setVideo] = useState([])
+
+  useEffect( () => {
+    fetch('http://localhost:8080/initalState')
+      .then(response => response.json())
+      .then(data => setVideo(data))
+  }, [])
+  console.log(video);
+  debugger
+
   return (
     <Fragment>
       <Header/>
