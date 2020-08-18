@@ -10,20 +10,21 @@ import './assets/styless/App.scss'
 
 function App() {
 
-  const [video, setVideo] = useState([])
+  const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] })
 
   useEffect( () => {
-    fetch('http://localhost:8080/initalState')
-      .then(response => response.json())
-      .then(data => setVideo(data))
+    const llamadoAPI = async () => {
+      const respuesta = await fetch('http://localhost:3000/initalState')
+      const data = await respuesta.json()
+      setVideos(data)
+    }
+    llamadoAPI()
   }, [])
-  console.log(video);
-  debugger
-
   return (
     <Fragment>
       <Header/>
       <Search/>
+      {videos.mylist === 0 ?
       <Categorias title="Mi lista" >
         <Carousel>
           <CarouselItem/>
@@ -32,11 +33,16 @@ function App() {
           <CarouselItem/>
         </Carousel>
       </Categorias>
+      : null
+      }
 
       <Categorias title="Tendencias" >
         <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
+          {
+            videos.trends.map(item => (
+              <CarouselItem key={item.id} {...item} />
+            ))
+          }
         </Carousel>
       </Categorias>
 
