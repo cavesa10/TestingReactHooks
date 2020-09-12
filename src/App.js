@@ -1,5 +1,6 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment} from 'react';
 
+import {useInitialState} from './hooks/useInitialState';
 import {Header} from './components/Header';
 import {Search} from './components/Search';
 import {Categorias} from './components/Categorias';
@@ -8,29 +9,24 @@ import {CarouselItem} from './components/CarouselItem';
 import {Footer} from './components/Footer';
 import './assets/styless/App.scss'
 
+const API = 'http://localhost:3004/initialState'
+
 function App() {
 
-  const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] })
+  const initialState = useInitialState(API)
 
-  useEffect( () => {
-    const llamadoAPI = async () => {
-      const respuesta = await fetch('http://localhost:3000/initalState')
-      const data = await respuesta.json()
-      setVideos(data)
-    }
-    llamadoAPI()
-  }, [])
   return (
     <Fragment>
       <Header/>
       <Search/>
-      {videos.mylist === 0 ?
+      {initialState.mylist.length > 0 ?
       <Categorias title="Mi lista" >
-        <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
+      <Carousel>
+          {
+            initialState.mylist.map(item => (
+              <CarouselItem key={item.id} {...item} />
+            ))
+          }
         </Carousel>
       </Categorias>
       : null
@@ -39,7 +35,7 @@ function App() {
       <Categorias title="Tendencias" >
         <Carousel>
           {
-            videos.trends.map(item => (
+            initialState.trends.map(item => (
               <CarouselItem key={item.id} {...item} />
             ))
           }
@@ -47,10 +43,12 @@ function App() {
       </Categorias>
 
       <Categorias title="Top 10 - Colombia" >
-        <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
+      <Carousel>
+          {
+            initialState.originals.map(item => (
+              <CarouselItem key={item.id} {...item} />
+            ))
+          }
         </Carousel>
       </Categorias>
 
